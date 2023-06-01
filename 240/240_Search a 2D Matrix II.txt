@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int row=matrix.size();
+        int col=matrix[0].size();
+
+
+        int rowIndex=0;
+        int colIndex=col-1;
+
+        while(rowIndex<row && colIndex>=0){
+            //Start at the top-right corner of the matrix (i.e., the element in the first row and last column). We will call this element.
+            int element = matrix[rowIndex][colIndex];
+            if(element==target){
+                return 1;
+            }
+            //If element is less than target, we can eliminate the entire first row (i.e., all elements in the first row are less than current and therefore less than target). Move one row down to consider the next element in that column. We will call this new element current.
+            if(element < target){
+                rowIndex++;
+            }
+            //If element is greater than target, we can eliminate the entire last column (i.e., all elements in the last column are greater than current and therefore greater than target). Move one column to the left to consider the next element in that row. We will call this new element current.
+            else{
+                colIndex--;
+            }
+        }
+        return 0;
+    }
+};

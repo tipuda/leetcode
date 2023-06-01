@@ -1,0 +1,41 @@
+//searching in a 2D Matrix
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+
+        //finding row and columns
+
+        int row = matrix.size();
+        int col= matrix[0].size();
+
+        //initializing the start and end index
+        int start =0;
+        int end = row*col-1;
+
+        //using binary serach logic
+        //run the loop till start and end will be equal(binary search logic)
+
+        while(start<=end){
+            //defining the mid position
+
+            int mid=(start+end)/2;
+            
+            //this is key point of the code, in the liner array or matrix we can get element using mid only, rows is constant so mid is their column.
+            //but in case of 2D we need to find row number as well as column number to search the element, so what we gonnd do is divide the mid index with number of columns means we get the index of row and remainder of this will give us index of columns(modulo function) use paper work to understand more clearly.   
+            
+            int element = matrix[mid/col][mid%col];
+
+            if(element==target){
+                return 1;
+            }
+            if(element<target){
+                start=mid+1;
+            }
+            else{
+                end=mid-1;
+            }
+        }
+        return 0;
+    }
+};
